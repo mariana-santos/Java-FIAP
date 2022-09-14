@@ -7,7 +7,7 @@ public class ex31 {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("Digite um número qualquer");
+		System.out.println("Digite um nï¿½mero qualquer");
 		int num = in.nextInt();
 		
 //		31. Criar uma rotina de entrada que aceite somente um valor positivo.
@@ -15,16 +15,16 @@ public class ex31 {
 //		DO - WHILE
 		do{	
 			if(num < 0){
-				System.out.println("Número inválido. Somente positivos são aceitos");
-				System.out.println("Digite um número qualquer");
+				System.out.println("NÃºmero invï¿½lido. Somente positivos sï¿½o aceitos");
+				System.out.println("Digite um nï¿½mero qualquer");
 				num = in.nextInt();
 			}
 		}while(num < 0);
 		
 //		WHILE	
 		while(num < 0){
-			System.out.println("Número inválido. Somente positivos são aceitos");
-			System.out.println("Digite um número qualquer");
+			System.out.println("Nï¿½mero invï¿½lido. Somente positivos sï¿½o aceitos");
+			System.out.println("Digite um nï¿½mero qualquer");
 			num = in.nextInt();
 		}
 
