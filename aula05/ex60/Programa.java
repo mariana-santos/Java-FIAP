@@ -22,7 +22,8 @@ public class Programa {
                     "3 - Saque \n" +
                     "4 - Transferência \n" +
                     "5 - Consulta de Saldo \n" +
-                    "6 - Sair \n\n");
+                    "6 - Consulta de Extrato \n" +
+                    "7 - Sair \n\n");
   System.out.printf("Digite a opção desejada: ");
   opcao = in.nextInt();
  
@@ -33,53 +34,39 @@ public class Programa {
       c.setId(id);
      
       System.out.println("Digite o nome: ");
-	c.setNome(in.next());
+      c.setNome(in.next());
+      
+      System.out.println("Digite a idade: ");
+      c.setIdade(in.nextInt());
 	
-	System.out.println("Digite a idade: ");
-	c.setIdade(in.nextInt());
-	
-	System.out.println("Digite o email: ");
-	c.setEmail(in.next());
-	
-	ContaBancaria conta = new ContaBancaria();
-    
-    System.out.print("Digite a agencia: ");
-    conta.setAgencia(in.next());
-    
-    System.out.print("Digite o numero: ");
-    conta.setNumero(in.next());
-    
-    c.setConta(conta);
-     
+      ContaBancaria conta = new ContaBancaria();
+      conta.setAgencia("4422");
+      
+      String num = Integer.toString((clientes.size() + 1));
+      conta.setNumero(num);
+      
+      c.setConta(conta);
       clientes.add(c);
      
       System.out.printf("Cliente e conta incluídos com sucesso!");
       System.in.read();
   }
-  else if (opcao == 2) {          
-	  for(Cliente c: clientes) {
-          c.exibirCliente();
-      }
+  else if (opcao == 2) {
+	  
+	  listarClientes(clientes);
      
       System.out.println("Digite o id do cliente que deseja depositar: ");
       int id_cliente = in.nextInt();
 		
-		int indexCliente = -1;
 		
-		for (Cliente cli: clientes){
-			if(cli.getId() == id_cliente){
-				indexCliente = clientes.indexOf(cli);
-				break;
-			}
-		}
-		
-		if(indexCliente != -1){
+		if(validaCliente(id_cliente, clientes)){
+			
 			System.out.println("Digite o valor que deseja depositar");
 			double valor = in.nextDouble();
-			Cliente cli = clientes.get(indexCliente);
+			Cliente cli = clientes.get(id_cliente - 1);
 			
-			cli.getConta().Depositar(valor);
-			System.out.println("Valor depositado com sucesso!");
+			if (cli.getConta().Depositar(valor)) System.out.println("Valor depositado com sucesso!");
+			else System.out.println("Não foi possível depositar esse valor!");
 			
 		}else {
 			System.out.println("Cliente não encontrado");
@@ -88,32 +75,21 @@ public class Programa {
 		System.in.read();
   }
   else if (opcao == 3) {
-	  for(Cliente c: clientes) {
-          c.exibirCliente();
-      }
+	  listarClientes(clientes);
      
       System.out.println("Digite o id do cliente que deseja sacar: ");
       int id_cliente = in.nextInt();
 		
-		int indexCliente = -1;
-		
-		for (Cliente cli: clientes){
-			if(cli.getId() == id_cliente){
-				indexCliente = clientes.indexOf(cli);
-				break;
-			}
-		}
-		
-		if(indexCliente != -1){
+		if(validaCliente(id_cliente, clientes)){
+			
 			System.out.println("Digite o valor que deseja sacar");
 			double valor = in.nextDouble();
-			Cliente cli = clientes.get(indexCliente);
+			Cliente cli = clientes.get(id_cliente - 1);
 			
-			if(valor > cli.getConta().consultarSaldo()) {
-				System.out.println("Não é possível sacar essa quantidade. Saldo insuficiente.");
-			}else {
-				cli.getConta().Sacar(valor);
+			if(cli.getConta().Sacar(valor)) {
 				System.out.println("Valor sacado com sucesso!");
+			}else {
+				System.out.println("Não é possível sacar essa quantidade.");
 			}
 		}else {
 			System.out.println("Cliente não encontrado");
@@ -122,51 +98,31 @@ public class Programa {
 		System.in.read();
   }
   else if (opcao == 4) {
-	  for(Cliente c: clientes) {
-          c.exibirCliente();
-      }
+	  
+	  listarClientes(clientes);
      
       System.out.println("Digite o id do cliente de onde sairá o valor da transferência");
 		int id_origem = in.nextInt();
 		
-		int indexClienteOrigem = -1;
-		
-		for (Cliente cli: clientes){
-			if(cli.getId() == id_origem){
-				indexClienteOrigem = clientes.indexOf(cli);
-				break;
-			}
-		}
-		
-		if(indexClienteOrigem != -1){
-			Cliente origem = clientes.get(indexClienteOrigem);
+		if(validaCliente(id_origem, clientes)){
+			Cliente origem = clientes.get(id_origem - 1);
 			
 			System.out.println("Digite o id do cliente que receberá o valor da transferência");
 			int id_destino = in.nextInt();
 			
-			int indexClienteDestino = -1;
-			
-			for (Cliente cli: clientes){
-				if(cli.getId() == id_destino){
-					indexClienteDestino = clientes.indexOf(cli);
-					break;
-				}
-			}
-			
-			if(indexClienteDestino != -1 && indexClienteDestino != indexClienteOrigem){
-				Cliente destino = clientes.get(indexClienteDestino);
+			if(validaCliente(id_destino, clientes) && id_origem != id_destino){
+				Cliente destino = clientes.get(id_destino - 1);
 				
 				System.out.println("Quanto deseja transferir?");
 				double valor = in.nextDouble();
 				
-				if(valor > origem.getConta().consultarSaldo()) {
-					System.out.println("Valor insuficiente para transferência!");
-				} else {
-					origem.getConta().Transferir(valor, destino);
+				if(origem.getConta().Transferir(valor, destino)) {
 					System.out.printf("Transferência realizada com sucesso!");
+				} else {
+					System.out.println("Não foi possível completar a transferência.");
 				}
 						
-			}else if(indexClienteDestino == indexClienteOrigem) {
+			}else if(id_destino == id_origem) {
 				System.out.println("Cliente de origem não pode ser o destinatário da transferência");
 			}
 			else{
@@ -181,15 +137,62 @@ public class Programa {
   else if(opcao == 5) {
 	  System.out.println("Consulta de saldo: ");
 	  
-	  for(Cliente c: clientes) {
-          c.exibirCliente();
-      }
+	  listarClientes(clientes);
 	  
 	  System.in.read();
+	  
+  }else if(opcao == 6) {
+	  listarClientes(clientes);
+	     
+      System.out.println("Digite o id do cliente que deseja visualizar o extrato: ");
+      int id_cliente = in.nextInt();
+		
+		if(validaCliente(id_cliente, clientes)){
+			
+			Cliente cli = clientes.get(id_cliente - 1);
+			
+			ArrayList <String> extrato = cli.getConta().getExtrato();
+			
+			System.out.println("===> Extrato de "+ cli.getNome() +"<===\n");
+			
+			for(String item: extrato) {
+		        System.out.println(item);
+		    }
+			
+		}else {
+			System.out.println("Cliente não encontrado");
+		}
+		
+		System.in.read();
   }
-}while(opcao != 6);
-
+}while(opcao >= 1 && opcao <= 6);
 	
 }
+ 
+public static Boolean validaCliente(int idDigitado, ArrayList<Cliente> clientes){
+	 
+	 int indexCliente = -1;
+	 
+		for (Cliente cli: clientes){
+			if(cli.getId() == idDigitado){
+				indexCliente = clientes.indexOf(cli);
+				break;
+			}
+		}
+		
+	 if (indexCliente != -1) return true;
+	 else return false;
+}
+
+public static void listarClientes(ArrayList<Cliente> clientes){
+	 
+	System.out.printf("===> Clientes cadastrados <===\n\n");
+	for(Cliente c: clientes) {
+        c.exibirCliente();
+        c.exibirConta();
+        System.out.println();
+    }
+}
+
 
 }
