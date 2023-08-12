@@ -1,11 +1,26 @@
 package br.com.fiap.domain.entity;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "tb_produto", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_nm_produto", columnNames = { "nm_produto" })
+})
 public class Produto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_produto")
+    @SequenceGenerator(name = "sq_produto", sequenceName = "sq_produto")
+    @Column(name = "id_produto")
     private Long id;
+
+    @Column(name = "nm_produto", nullable = false)
     private String nome;
+
+    @Column(name = "ds_produto", nullable = false)
     private String descricao;
+
     private BigDecimal valor;
 
     public Produto(){ }
@@ -16,8 +31,6 @@ public class Produto {
         this.setDescricao(descricao);
         this.setValor(valor);
     }
-
-
 
     @Override
     public String toString() {
