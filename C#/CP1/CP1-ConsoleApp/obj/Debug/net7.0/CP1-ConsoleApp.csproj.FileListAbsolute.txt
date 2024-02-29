@@ -1,0 +1,15 @@
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\bin\Debug\net7.0\CP1-ConsoleApp.exe
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\bin\Debug\net7.0\CP1-ConsoleApp.deps.json
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\bin\Debug\net7.0\CP1-ConsoleApp.runtimeconfig.json
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\bin\Debug\net7.0\CP1-ConsoleApp.dll
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\bin\Debug\net7.0\CP1-ConsoleApp.pdb
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.csproj.AssemblyReference.cache
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.AssemblyInfo.cs
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.dll
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\refint\CP1-ConsoleApp.dll
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.pdb
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\CP1-ConsoleApp.genruntimeconfig.cache
+C:\Users\logonrmlocal\source\repos\CP1-ConsoleApp\obj\Debug\net7.0\ref\CP1-ConsoleApp.dll
